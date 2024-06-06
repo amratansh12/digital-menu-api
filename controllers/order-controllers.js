@@ -96,7 +96,12 @@ const getOrdersByUserId = async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ _id: userId }).populate("orders");
+    const user = await User.findOne({ _id: userId }).populate({
+      path: "orders",
+      populate: {
+        path: "items",
+      },
+    });
 
     if (!user) {
       return res.status(500).json({ error: "Unable to fetch orders" });
@@ -111,13 +116,18 @@ const getOrdersByUserId = async (req, res) => {
 const getOrdersByRestaurantId = async (req, res) => {
   const { restaurantId } = req.body;
 
-  if (!userId) {
+  if (!restaurantId) {
     return res.status(400).json({ error: "RestaurantID missing" });
   }
 
   try {
     const restaurant = await Restaurant.findOne({ _id: restaurantId }).populate(
-      "orders"
+      {
+        path: "orders",
+        populate: {
+          path: "items",
+        },
+      }
     );
 
     if (!restaurant) {
@@ -130,9 +140,26 @@ const getOrdersByRestaurantId = async (req, res) => {
   }
 };
 
+const updateOrderStatus = async (req, res) => {
+  const { orderId, status } = req.body;
+
+  if (!orderId || !status) {
+    return res.status(400).json({ error: "Specify the order and status" });
+  }
+
+  try {
+    await Orders.findOneAndUpdate({ _id: orderId }, { status });
+
+    return res.status(200).json({ data: "Success" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createOrder,
   verifyOrder,
   getOrdersByRestaurantId,
   getOrdersByUserId,
+  updateOrderStatus,
 };
