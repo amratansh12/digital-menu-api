@@ -17,6 +17,8 @@ app.use(express.json());
 
 connectDb();
 
+app.get("/", (req, res) => res.status(200).json({ data: "Server is running" }));
+
 app.use("/auth/v1", authRoutes);
 
 app.use("/restaurant/v1", restaurantRoutes);
