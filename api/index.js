@@ -3,16 +3,20 @@ config();
 
 const express = require("express");
 const cors = require("cors");
-const { connectDb } = require("./utils/index.js");
-const authRoutes = require("./routes/user.routes.js");
-const restaurantRoutes = require("./routes/restaurant.routes.js");
-const menuRoutes = require("./routes/menu-item.routes.js");
-const qrcodeRoutes = require("./routes/qrcode.routes.js");
-const orderRoutes = require("./routes/order.routes.js");
+const { connectDb } = require("../utils/index.js");
+const authRoutes = require("../routes/user.routes.js");
+const restaurantRoutes = require("../routes/restaurant.routes.js");
+const menuRoutes = require("../routes/menu-item.routes.js");
+const qrcodeRoutes = require("../routes/qrcode.routes.js");
+const orderRoutes = require("../routes/order.routes.js");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(express.json());
 
 connectDb();
