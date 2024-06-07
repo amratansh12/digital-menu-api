@@ -12,7 +12,9 @@ const orderRoutes = require("../routes/order.routes.js");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://digital-menu-sandy.vercel.app/',
+}));
 app.use(express.json());
 
 connectDb();
