@@ -20,6 +20,10 @@ const OrderSchema = new mongoose.Schema({
     enum: ["Pending", "Cancelled", "Accepted", "Served"],
     required: true,
   },
+  tableNumber: {
+    type: Number,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

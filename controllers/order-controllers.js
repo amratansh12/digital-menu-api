@@ -44,6 +44,7 @@ const verifyOrder = async (req, res) => {
       restaurantId,
       userId,
       items,
+      tableNumber,
     } = req.body;
 
     const secret = process.env.RAZORPAY_API_SECRET;
@@ -61,6 +62,7 @@ const verifyOrder = async (req, res) => {
       restaurantId,
       userId,
       status: "Pending",
+      tableNumber,
     });
 
     await User.findOneAndUpdate(
