@@ -2,6 +2,8 @@
 
 ## Description
 
+FRONTNED REPOSITORY - https://github.com/amratansh12/digital-menu
+
 The backend of the Digital Menu App is responsible for handling API requests, managing database interactions, and providing secure authentication for the app. It supports role-based access for Admins and Users, enabling comprehensive restaurant and menu management, order processing, and payment integration.
 
 ## Table of Contents
